@@ -246,10 +246,16 @@ catalogs:
     vitest:
       specifier: 4.0.14
       version: 4.0.14
+    workbox-expiration:
+      specifier: ^7.4.0
+      version: 7.4.1
     workbox-precaching:
       specifier: ^7.4.0
       version: 7.4.0
     workbox-routing:
+      specifier: ^7.4.0
+      version: 7.4.0
+    workbox-strategies:
       specifier: ^7.4.0
       version: 7.4.0
     workbox-window:
@@ -625,10 +631,16 @@ importers:
       unocss:
         specifier: 'catalog:'
         version: 66.6.2(vite@7.3.1(@types/node@24.10.15)(jiti@2.6.1)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))
+      workbox-expiration:
+        specifier: 'catalog:'
+        version: 7.4.1
       workbox-precaching:
         specifier: 'catalog:'
         version: 7.4.0
       workbox-routing:
+        specifier: 'catalog:'
+        version: 7.4.0
+      workbox-strategies:
         specifier: 'catalog:'
         version: 7.4.0
     devDependencies:
@@ -5939,8 +5951,14 @@ packages:
   workbox-core@7.4.0:
     resolution: {integrity: sha512-6BMfd8tYEnN4baG4emG9U0hdXM4gGuDU3ectXuVHnj71vwxTFI7WOpQJC4siTOlVtGqCUtj0ZQNsrvi6kZZTAQ==}
 
+  workbox-core@7.4.1:
+    resolution: {integrity: sha512-DT+vu46eh/2vRsSHTY4Xmc32Z1rr9PRlQUXr1Dx30ZuXRWwOsvZgGgcwxcasubQLQmbTNYZjv44LkBAQ4tT5tQ==}
+
   workbox-expiration@7.0.0:
     resolution: {integrity: sha512-MLK+fogW+pC3IWU9SFE+FRStvDVutwJMR5if1g7oBJx3qwmO69BNoJQVaMXq41R0gg3MzxVfwOGKx3i9P6sOLQ==}
+
+  workbox-expiration@7.4.1:
+    resolution: {integrity: sha512-lRKUF7b+OGbeXkQk1s6MHXOa3d7Xxf7Of31W6c6hCfipfIyrtdWZ89stq21AHZMaoG7VNFoHply4Ox+rU31TWg==}
 
   workbox-google-analytics@7.0.0:
     resolution: {integrity: sha512-MEYM1JTn/qiC3DbpvP2BVhyIH+dV/5BjHk756u9VbwuAhu0QHyKscTnisQuz21lfRpOwiS9z4XdqeVAKol0bzg==}
@@ -11993,10 +12011,17 @@ snapshots:
 
   workbox-core@7.4.0: {}
 
+  workbox-core@7.4.1: {}
+
   workbox-expiration@7.0.0:
     dependencies:
       idb: 7.1.1
       workbox-core: 7.0.0
+
+  workbox-expiration@7.4.1:
+    dependencies:
+      idb: 7.1.1
+      workbox-core: 7.4.1
 
   workbox-google-analytics@7.0.0:
     dependencies:

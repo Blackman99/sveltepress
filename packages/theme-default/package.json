@@ -82,8 +82,10 @@
     "uid": "catalog:",
     "unist-util-visit": "catalog:",
     "unocss": "catalog:",
+    "workbox-expiration": "catalog:",
     "workbox-precaching": "catalog:",
-    "workbox-routing": "catalog:"
+    "workbox-routing": "catalog:",
+    "workbox-strategies": "catalog:"
   },
   "devDependencies": {
     "@sveltejs/kit": "catalog:",

@@ -6,9 +6,12 @@ title: PWA
 
 This feature integrated [@vite-pwa/sveltekit](https://vite-pwa-org.netlify.app/frameworks/sveltekit.html#sveltekit-pwa-plugin)
 
-Pass `pwa` option to theme default to use pwa. The options are exactly the same as [SvelteKit PWA Plugin Options](https://vite-pwa-org.netlify.app/frameworks/sveltekit.html#sveltekit-pwa-plugin-options) except for `darkManifest`, which is the manifest path that would used for dark theme
+Pass `pwa` option to theme default to use pwa. The options are exactly the same as [SvelteKit PWA Plugin Options](https://vite-pwa-org.netlify.app/frameworks/sveltekit.html#sveltekit-pwa-plugin-options) except for `darkManifest` and `cacheHTML`.
 
-And the svelte.config.js need to config `files.serviceWorker`, use the `SERVICE_WORKER_PATH` exported from `@sveltepress/theme-default`
+- `darkManifest`: the manifest path used for dark theme
+- `cacheHTML`: which prerendered HTML pages are precached (see below)
+
+And the svelte.config.js need to config `files.serviceWorker` , use the `SERVICE_WORKER_PATH` exported from `@sveltepress/theme-default`
 
 ```ts title="svelte.config.js"
 import adapter from '@sveltejs/adapter-static'
@@ -35,6 +38,43 @@ export default config
 If you want to enable pwa.
 You will need to add `workbox-window` as a dev dependency to your Vite project.
 :::
+
+## HTML precache (versions & i18n)
+
+By default Sveltepress only precaches the **app shell** (JS / CSS / fonts) and the **homepage**. Other documentation pages are cached at runtime when the user visits them (`NetworkFirst`, capped at 64 entries).
+
+This keeps service worker install and update fast when the site has many versions and locales. Precaching every prerendered HTML file makes Workbox hash, compare and download `versions × locales × pages` on every update.
+
+### `pwa.cacheHTML`
+
+| Value | Precached HTML |
+| --- | --- |
+| `'home'` (default) | Homepage only |
+| `false` | Same as `'home'` (homepage is kept as the offline fallback) |
+| `true` | All prerendered HTML / JSON (previous behavior) |
+| `string[]` | Homepage + matching URL prefixes |
+
+Precache only the current version and a locale:
+
+```ts
+pwa: {
+  cacheHTML: ['/v3/', '/zh/'],
+}
+```
+
+Restore the previous “cache every page” behavior:
+
+```ts
+pwa: {
+  cacheHTML: true,
+}
+```
+
+:::tip
+A glob starting with `prerendered/` is always included. Otherwise `@vite-pwa/sveltekit` would append `prerendered/**/*.{html,json}` and pull every version/locale page back into the precache.
+:::
+
+Visited pages still work offline through the runtime cache, even when they are not precached.
 
 ## Example config
 
