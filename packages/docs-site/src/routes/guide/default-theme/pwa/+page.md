@@ -57,17 +57,25 @@ This keeps service worker install and update fast when the site has many version
 Precache only the current version and a locale:
 
 ```ts
-pwa: {
-  cacheHTML: ['/v3/', '/zh/'],
-}
+import { defaultTheme } from '@sveltepress/theme-default'
+
+defaultTheme({
+  pwa: {
+    cacheHTML: ['/v3/', '/zh/'],
+  },
+})
 ```
 
 Restore the previous “cache every page” behavior:
 
 ```ts
-pwa: {
-  cacheHTML: true,
-}
+import { defaultTheme } from '@sveltepress/theme-default'
+
+defaultTheme({
+  pwa: {
+    cacheHTML: true,
+  },
+})
 ```
 
 :::tip
