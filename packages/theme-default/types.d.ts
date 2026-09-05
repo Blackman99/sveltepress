@@ -22,6 +22,19 @@ declare module 'virtual:sveltepress/theme-default' {
     items?: LinkItem[]
   }
 
+  /**
+   * Which prerendered HTML pages to put in the Workbox precache.
+   *
+   * Default `'home'` only precaches the homepage so service-worker
+   * install/update stays fast on sites with many versions and locales.
+   *
+   * - `'home'`: homepage only
+   * - `true`: all prerendered HTML (previous behavior)
+   * - `false`: same as `'home'`
+   * - `string[]`: URL prefixes, e.g. `['/zh/', '/en/v3/']`
+   */
+  export type CacheHTML = boolean | 'home' | string[]
+
   export interface DefaultThemeOptions {
     navbar?: Array<LinkItem>
     github?: string
@@ -32,6 +45,7 @@ declare module 'virtual:sveltepress/theme-default' {
     ga?: string
     pwa?: SvelteKitPWAOptions & {
       darkManifest?: string
+      cacheHTML?: CacheHTML
     }
     docsearch?: Omit<DocSearchProps, 'container' | 'theme'>
     themeColor?: {

@@ -9,9 +9,12 @@ import highlighter, { initHighlighter } from './markdown/highlighter.js'
 import installPkg from './markdown/install-pkg.js'
 import links from './markdown/links.js'
 import liveCode from './markdown/live-code.js'
+import { resolvePrecacheGlobPatterns } from './pwa/cache-html.js'
 import createPreCorePlugins from './vite-plugins/create-pre-core-plugins.js'
 
 export { SERVICE_WORKER_PATH } from './constants.js'
+export { resolvePrecacheGlobPatterns } from './pwa/cache-html.js'
+export type { CacheHTML } from './pwa/cache-html.js'
 
 const VIRTUAL_PWA = 'virtual:pwa-info'
 const VIRTUAL_PWA_SVELTE_REGISTER = 'virtual:pwa-register/svelte'
@@ -30,18 +33,21 @@ const defaultTheme: ThemeDefault = (options) => {
       corePlugin,
     ]
     if (options?.pwa) {
+      const {
+        cacheHTML = 'home',
+        injectManifest: userInjectManifest,
+        ...pwaOptions
+      } = options.pwa
       plugins.push(SvelteKitPWA({
         strategies: 'injectManifest',
         srcDir: SERVICE_WORKER_PATH.replace(/sw\.js$/, ''),
         filename: 'sw.js',
+        ...pwaOptions,
         injectManifest: {
           globDirectory: '.svelte-kit/output',
-          globPatterns: [
-            'client/**/*.{js,css,ico,png,svg,webp,otf,woff,woff2}',
-            'prerendered/**/*.html',
-          ],
+          globPatterns: resolvePrecacheGlobPatterns(cacheHTML),
+          ...userInjectManifest,
         },
-        ...options.pwa,
       }))
     }
     else {
