@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import {
+  prefixToPrerenderedGlobs,
   PWA_ALL_PRERENDERED_GLOB,
   PWA_CLIENT_GLOB,
   PWA_HOME_GLOB,
-  prefixToPrerenderedGlobs,
   resolvePrecacheGlobPatterns,
 } from '../src/pwa/cache-html'
 

@@ -59,17 +59,25 @@ export default config
 只预缓存当前版本和中文：
 
 ```ts
-pwa: {
-  cacheHTML: ['/v3/', '/zh/'],
-}
+import { defaultTheme } from '@sveltepress/theme-default'
+
+defaultTheme({
+  pwa: {
+    cacheHTML: ['/v3/', '/zh/'],
+  },
+})
 ```
 
 恢复「缓存全部页面」的旧行为：
 
 ```ts
-pwa: {
-  cacheHTML: true,
-}
+import { defaultTheme } from '@sveltepress/theme-default'
+
+defaultTheme({
+  pwa: {
+    cacheHTML: true,
+  },
+})
 ```
 
 :::tip

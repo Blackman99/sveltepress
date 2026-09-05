@@ -57,17 +57,25 @@ export default config
 শুধু বর্তমান version এবং একটি locale precache করতে:
 
 ```ts
-pwa: {
-  cacheHTML: ['/v3/', '/zh/'],
-}
+import { defaultTheme } from '@sveltepress/theme-default'
+
+defaultTheme({
+  pwa: {
+    cacheHTML: ['/v3/', '/zh/'],
+  },
+})
 ```
 
 আগের “সব পেজ cache করো” আচরণ ফিরিয়ে আনতে:
 
 ```ts
-pwa: {
-  cacheHTML: true,
-}
+import { defaultTheme } from '@sveltepress/theme-default'
+
+defaultTheme({
+  pwa: {
+    cacheHTML: true,
+  },
+})
 ```
 
 ভিজিট করা পেজ precache না থাকলেও runtime cache দিয়ে অফলাইনে খোলা যাবে।
